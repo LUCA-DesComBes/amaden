@@ -21,18 +21,21 @@ getItems().then((data) => {
         availableItems.appendChild(listItem);
         const btnItem = listItem.querySelector("button")
         btnItem.addEventListener("click", () => {
-            const listCart = document.createElement("li");
-            listCart.classList.add("cart-item")
-            listCart.innerHTML = `
-            <h3>${items.name}</h3>
-            <p>${items.price} €</p>
-            <button>Remove to cart</button>
-            ` 
-            cart.appendChild(listCart)
-            const removeBtn = listCart.querySelector('button');
-            removeBtn.addEventListener("click", ()=>{
-                listCart.remove();
-            })
+            cartItems.push(items)
+            let tmp = "";
+            for(let article of cartItems){
+                const listCart = document.createElement("li");
+                listCart.classList.add("cart-item")
+                let html =  `
+                <li class="cart-item">
+                <h3>${article.name}</h3>
+                <p>${article.price} €</p>
+                <button>Remove to cart</button>
+                </li>
+                ` 
+                tmp += html;
+            }
+            cart.innerHTML = tmp
         })
     }
 })
